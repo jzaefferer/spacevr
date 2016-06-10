@@ -1,0 +1,34 @@
+{
+  "name": "spacevr",
+  "description": "Boilerplate for creating WebVR scenes using A-Frame",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "budo --verbose --port 3000 --open",
+    "deploy": "ghpages",
+    "ghpages": "ghpages"
+  },
+  "devDependencies": {
+    "budo": "^7.0.0",
+    "ghpages": "0.0.3"
+  },
+  "keywords": [
+    "aframe",
+    "aframe-example",
+    "aframe-scene",
+    "aframe-boilerplate"
+  ],
+  "main": "index.js",
+  "dependencies": {
+    "aframe": "^0.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jzaefferer/spacevr.git"
+  },
+  "author": "Jörn Zaefferer",
+  "bugs": {
+    "url": "https://github.com/jzaefferer/spacevr/issues"
+  },
+  "homepage": "https://github.com/jzaefferer/spacevr#readme"
+}
