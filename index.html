@@ -10,17 +10,27 @@
     <script>
       AFRAME.registerComponent('click-listener', {
         init: function () {
-          var velocity = this.velocity = new THREE.Vector3();
-          var el = this.el;
+          this.velocity = new THREE.Vector3();
+          var that = this;
           document.body.addEventListener('pointerdown', function () {
-            velocity.z = -0.1;
+            // velocity.z = 0.01;
+            that.accelerate = true;
           });
           document.body.addEventListener('pointerup', function () {
-            velocity.z = 0;
+            that.accelerate = false;
           });
         },
         tick: function (t, dt) {
           var velocity = this.velocity;
+          var rotation = this.el.object3D.children[0].rotation;
+          // TODO accelerate in the direction of the camera
+          if (this.accelerate) {
+            velocity.z += 0.01;
+            velocity.z = Math.min(1, velocity.z);
+          } else {
+            velocity.z -= 0.01;
+            velocity.z = Math.max(0, velocity.z);
+          }
           var position = this.el.getAttribute('position');
           this.el.setAttribute('position', {
             x: position.x + velocity.x,
