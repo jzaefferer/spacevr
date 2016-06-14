@@ -6,19 +6,17 @@
     <script src="http://code.jquery.com/pep/0.4.1/pep.min.js"></script>
     <script src="https://aframe.io/releases/0.2.0/aframe.min.js"></script>
   </head>
-  <body>
+  <body touch-action="none">
     <script>
-      // TODO make pointer events work on my Nexus 5 as well
-      var hastouch = 'ontouchstart' in window;
       AFRAME.registerComponent('click-listener', {
         init: function () {
           this.velocity = 0;
           var that = this;
-          document.body.addEventListener(hastouch ? 'touchstart' : 'pointerdown', function () {
+          document.body.addEventListener('pointerdown', function () {
             // velocity.z = 0.01;
             that.accelerate = true;
           });
-          document.body.addEventListener(hastouch ? 'touchend' : 'pointerup', function () {
+          document.body.addEventListener('pointerup', function () {
             that.accelerate = false;
           });
         },
