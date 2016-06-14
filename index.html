@@ -8,34 +8,36 @@
   </head>
   <body>
     <script>
+      // TODO make pointer events work on my Nexus 5 as well
+      var hastouch = 'ontouchstart' in window;
       AFRAME.registerComponent('click-listener', {
         init: function () {
-          this.velocity = new THREE.Vector3();
+          this.velocity = 0;
           var that = this;
-          document.body.addEventListener('pointerdown', function () {
+          document.body.addEventListener(hastouch ? 'touchstart' : 'pointerdown', function () {
             // velocity.z = 0.01;
             that.accelerate = true;
           });
-          document.body.addEventListener('pointerup', function () {
+          document.body.addEventListener(hastouch ? 'touchend' : 'pointerup', function () {
             that.accelerate = false;
           });
         },
         tick: function (t, dt) {
-          var velocity = this.velocity;
-          var rotation = this.el.object3D.children[0].rotation;
-          // TODO accelerate in the direction of the camera
+          var camera = this.el.object3D.children[0].quaternion;
           if (this.accelerate) {
-            velocity.z += 0.01;
-            velocity.z = Math.min(1, velocity.z);
+            this.velocity += 0.01;
           } else {
-            velocity.z -= 0.01;
-            velocity.z = Math.max(0, velocity.z);
+            this.velocity -= 0.01;
           }
+          this.velocity = Math.min(1, this.velocity);
+          this.velocity = Math.max(0, this.velocity);
+          var delta = new THREE.Vector3(0, 0, -this.velocity);
+          delta.applyQuaternion(camera);
           var position = this.el.getAttribute('position');
           this.el.setAttribute('position', {
-            x: position.x + velocity.x,
-            y: position.y + velocity.y,
-            z: position.z + velocity.z
+            x: position.x + delta.x,
+            y: position.y + delta.y,
+            z: position.z + delta.z
           });
         }
       });
@@ -47,13 +49,12 @@
       </a-box>
       <a-cylinder position="1 0.75 1" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
       <a-plane rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <!-- <a-sky src="starmap_g4k.jpg"></a-sky> -->
+      <a-sky src="starmap_g4k.jpg"></a-sky>
 
       <a-light type="spot" color="#333" position="-20 0 0" look-at="a-box"></a-light>
       <a-light type="point" color="#AAA" position="0 5 0"></a-light>
 
       <a-entity click-listener position="0 2 5">
-        <!-- <a-animation attribute="position" repeat="indefinite" dur="5000" to="0 3 6"></a-animation> -->
         <a-entity camera look-controls>
           <a-cursor color="#2E3A87">
         </a-entity>
