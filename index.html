@@ -31,12 +31,7 @@
           this.velocity = Math.max(0, this.velocity);
           var delta = new THREE.Vector3(0, 0, -this.velocity);
           delta.applyQuaternion(camera);
-          var position = this.el.getAttribute('position');
-          this.el.setAttribute('position', {
-            x: position.x + delta.x,
-            y: position.y + delta.y,
-            z: position.z + delta.z
-          });
+          this.el.object3D.position.add(delta);
         }
       });
     </script>
