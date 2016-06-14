@@ -36,20 +36,33 @@
       });
     </script>
     <a-scene>
-      <a-sphere position="0 1.25 -1" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-box position="-1 0.5 1" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9">
-        <a-animation attribute="rotation" repeat="indefinite" dur="5000" to="0 405 0"></a-animation>
+      <a-sphere position="-14 7.25 -4" radius="1.25" color="#EF2D5E"></a-sphere>
+      <a-box position="-2 0.5 3" rotation="0 45 90" width="1" height="1" depth="1" color="#4CC3D9">
+        <a-animation attribute="rotation" easing="linear" repeat="indefinite" dur="8000" to="0 405 0"></a-animation>
       </a-box>
-      <a-cylinder position="1 0.75 1" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-sky src="starmap_g4k.jpg"></a-sky>
+      <a-cylinder position="5 3.75 1" radius="0.5" height="1.5" color="#FFC65D">
+        <a-animation attribute="rotation" easing="linear" repeat="indefinite" dur="8000" to="0 0 360"></a-animation>
+      </a-cylinder>
+      <a-entity position="7 4 -8" rotation="0 0 90" collada-model="url(assets/atst.dae)">
+        <a-animation attribute="rotation" easing="linear" repeat="indefinite" dur="30000" to="0 720 450"></a-animation>
+      </a-entity>
+      <a-entity material="metalness: 1" position="-10 -4 4" rotation="0 0 0" collada-model="url(assets/lambdashuttle.dae)">
+        <a-animation attribute="rotation" easing="linear" repeat="indefinite" dur="15000" to="0 360 0"></a-animation>
+      </a-entity>
+      <a-entity position="10 10 10" collada-model="url(assets/katze.dae)">
+      </a-entity>
+      <a-entity position="100 50 50" rotation="-45 20 0" scale="0.5 0.5 0.5" collada-model="url(assets/praatenboot.dae)">
+        <a-animation attribute="rotation" easing="linear" repeat="indefinite" dur="150000" to="-405 380 0"></a-animation>
+      </a-entity>
 
-      <a-light type="spot" color="#333" position="-20 0 0" look-at="a-box"></a-light>
+      <a-sky src="assets/starmap_g4k.jpg"></a-sky>
+
+      <a-light type="spot" color="#333" position="-20 0 0"></a-light>
       <a-light type="point" color="#AAA" position="0 5 0"></a-light>
 
-      <a-entity click-listener position="0 2 5">
+      <a-entity click-listener rotation="0 0 0" position="0 0 0">
         <a-entity camera look-controls>
-          <a-cursor color="#2E3A87">
+          <!-- <a-cursor color="#2E3A87"> -->
         </a-entity>
       </a-entity>
     </a-scene>
